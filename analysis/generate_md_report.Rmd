@@ -1,0 +1,11 @@
+---
+title: "Case Study 1"
+author: "Kevin OKiah"
+date: "June 21, 2017"
+output: md_document
+---
+
+```{r}
+setwd("C:/Users/kevolo/Desktop/smu/doing datascience/DoingDataScienceCaseStudy1")
+source("batch.R")
+```

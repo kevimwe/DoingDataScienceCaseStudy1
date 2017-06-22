@@ -1,0 +1,152 @@
+---
+title: "Case Study 1"
+author: "Kevin OKiah"
+date: "June 21, 2017"
+output: md_document
+---
+# Author: Kevin Okiah                                                   
+# Course: SMU MSDS6306 
+
+#Introduction
+This case study explores beers and breweries for the 51 states in the us.
+
+```{r}
+#get Working Directory
+y<-getwd()
+
+#load libraries required to run this project
+source(paste0(y,"/analysis/load_libraries.R"))
+
+#load data to R
+
+source(paste0(y,"/analysis/load_and_explore_data.R"))
+
+```
+
+##Case Study Questions
+### 1. How many breweries are present in each state?
+```{r}
+# I am using the count function to count the number of breweries grouped by "state"
+names(breweries) #print the column names for breweries dataset
+count(breweries, "State")
+```
+
+### 2. Merge beer data with breweries data by brewery id. Print ﬁrst 6 observations and the last six observations to check the merged ﬁle.
+```{r}
+names(breweries) #Checking the  column names for breweries dataset
+names(beers) #Checking column names for breweries dataset
+
+#renaming the breweries column name "Brew ID" to "Brewery_id" to match beers brewery_id
+names(breweries)<-c("Brewery_id","Name","City", "State")
+
+# merge two data frames by ID
+Brewery_and_Beer <- merge(breweries,beers,by=c("Brewery_id"))
+
+head(Brewery_and_Beer) # printing the first 6 observations
+tail(Brewery_and_Beer) #printing the last 6 observations
+
+```
+
+### 3. Report the number of NA’s in each column.
+```{r}
+# function to count the number of NAs per column
+NA_counter<-function(y){
+  sum(length(which(is.na(y))))
+}
+# Using Sapply to call the NA_counter on Brewery_and_beer dataset
+NA_count <-sapply(Brewery_and_Beer, NA_counter)
+NA_count <- data.frame(NA_count)
+print(NA_count)
+
+```
+
+### 4. Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
+This code block caclculate the median alcohol content(ABV) and International Bitterness (IBU) and plots a bar chart to compare them
+```{r}
+#clean data
+Brewery_and_Beer<-na.omit(Brewery_and_Beer)
+
+
+#Median IBU->international bitterness by state
+IBU_by_State <- by( Brewery_and_Beer$IBU, Brewery_and_Beer$State, median)
+IBU_by_State<-as.data.frame(IBU_by_State)
+names(IBU_by_State) = c("State", "MeDian")
+
+print(IBU_by_State)
+
+#Median ABV -> Alcohol content by state
+ABV_by_State <- by( Brewery_and_Beer$ABV, Brewery_and_Beer$State, median)
+ABV_by_State <-as.data.frame(ABV_by_State)
+
+names(ABV_by_State) = c("State", "MeDian")
+
+print(ABV_by_State)
+
+
+# this ggplot code block generates a bar of international bitterness(IBU) by state
+ggplot(IBU_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="Seagreen", fill="red",width=.7)+
+labs(title = "Bar Chart of Bitterness of Beer (IBU) by State")
+
+#this ggplot code block generates a bar of Alcohol Content (ABV) by state
+
+ggplot(ABV_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="red", fill="Seagreen",width=.7)+
+labs(title = "Bar Chart of Alcohol Content (ABV) by State") 
+
+```
+
+
+### 5. Which state has the maximum alcoholic beer? Which state has the most bitter beer?
+```{r}
+#maximum alcoholic beer
+#removing ABV NA's
+Brewery_and_Beer$missingABV <- (Brewery_and_Beer$ABV =="NA") #mark NAs
+Brewery_and_Beer_ABV <- Brewery_and_Beer[which(Brewery_and_Beer$missingABV==FALSE),]# remove Nas
+
+Max_ABV<-data.frame(Brewery_and_Beer_ABV[which(Brewery_and_Beer_ABV$ABV==max(Brewery_and_Beer_ABV$ABV)),]) # select the row with max ABV
+
+print(paste0("The state with the beer with maximum alcohol is ->", Max_ABV$State)) # print the stae with Max alcoholic beer 
+
+#state with the most bitter beer
+
+#removing ABV NA's
+Brewery_and_Beer$missingIBU <- (Brewery_and_Beer$IBU =="NA") #mark NAs
+Brewery_and_Beer_IBU <- Brewery_and_Beer[which(Brewery_and_Beer$missingIBU==FALSE),]# remove Nas
+
+Max_IBU<-data.frame(Brewery_and_Beer_IBU[which(Brewery_and_Beer_IBU$IBU==max(Brewery_and_Beer_IBU$IBU)),]) # select the row with max IBU
+
+print(paste0("The state with Most bitter beer is ->", Max_IBU$State)) # print the stae with Max alcoholic beer 
+
+
+```
+
+
+### 6. Summary statistics for ABV (Alcohol by volume) variable.
+I am using describeBy function from pysch package to generate descriptive statistics
+```{r}
+summary<-data.frame(describeBy(Brewery_and_Beer_ABV$ABV, Brewery_and_Beer_ABV$Ounces, mat=TRUE), row.names = NULL )# using describeBy function from pysch package for summary by
+#print(summary)
+
+#rename group name to volume
+names(summary)<- c("item","Volume","vars","n","mean","sd","median","trimmed","mad","min","max","range","skew","kurtosis","se") 
+print(summary)
+```
+
+### 7. Is there a relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
+
+There is a positive correlation between ABV and IBU as shown in the regression trend line in the scatter plot below. As
+IBU increase ABV.
+
+```{r}
+p <- ggplot(Brewery_and_Beer, aes(Brewery_and_Beer$IBU, Brewery_and_Beer$ABV))
+p + geom_point(colour = "red", na.rm=TRUE)+    geom_smooth(method=lm,   # Add linear regression line
+                se=FALSE, na.rm=TRUE) +   # Don't add shaded confidence region
+  labs(title = "Bitterness of Beer (IBU) vs Alcoholic Content (ABV)", x = "IBU", y ="ABV")
+
+```
+
+#session info
+
+```{r}
+sessionInfo()
+```
+
