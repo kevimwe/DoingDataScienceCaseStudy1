@@ -1,11 +1,7 @@
 Beers and Breweries in the US
 =============================
 
-Author: Kevin Okiah
--------------------
-
-Course: SMU MSDS6306
---------------------
+#### Author: Kevin Okiah
 
 ### Introduction
 
@@ -29,7 +25,7 @@ document can be gerated by running either `batch.R` or
 
 We begin this analysis by loading R libraries that we will need. This is
 achived by running `load_libraries.R` which is in the analysis folder.
-`load_libraries.R` calls p\_load from `pacman` library that checks if a
+`load_libraries.R` calls `p_load` from `pacman` library that checks if a
 library is installed or not, if not it installs it and loads the library
 for the R session
 
@@ -43,13 +39,15 @@ load `Beers` and `Breweries` datasets. `load_and_explore_data.R` found
 in the analysis folder is geared for this loading and exploratory
 analysis of this two dataset. We check for the number or rows and
 columns, column names and structure of each dataset using str() command
-which is available in base R. `load_and_explore_data.R` is excecuted by
-running the codeblock below
+which is available in base R.
+\[`load_and_explore_data.R`\]{<https://github.com/kevimwe/DoingDataScienceCaseStudy1/analysis/load_and_explore_data.R>}
+is excecuted by running the codeblock below
 
     #load data to R
     source(paste0(y,"/analysis/load_and_explore_data.R"))
 
-    ## Beers dataset /n'data.frame':    2410 obs. of  7 variables:
+    ## Beers Data
+    ## 'data.frame':    2410 obs. of  7 variables:
     ##  $ Name      : Factor w/ 2305 levels "#001 Golden Amber Lager",..: 1638 577 1705 1842 1819 268 1160 758 1093 486 ...
     ##  $ Beer_ID   : int  1436 2265 2264 2263 2262 2261 2260 2259 2258 2131 ...
     ##  $ ABV       : num  0.05 0.066 0.071 0.09 0.075 0.077 0.045 0.065 0.055 0.086 ...
@@ -57,20 +55,63 @@ running the codeblock below
     ##  $ Brewery_id: int  409 178 178 178 178 178 178 178 178 178 ...
     ##  $ Style     : Factor w/ 100 levels "","Abbey Single Ale",..: 19 18 16 12 16 80 18 22 18 12 ...
     ##  $ Ounces    : num  12 12 12 12 12 12 12 12 12 12 ...
-    ## Breweries dataset /n'data.frame':    558 obs. of  4 variables:
+    ## Breweries Data
+    ## 'data.frame':    558 obs. of  4 variables:
     ##  $ Brew_ID: int  1 2 3 4 5 6 7 8 9 10 ...
     ##  $ Name   : Factor w/ 551 levels "10 Barrel Brewing Company",..: 355 12 266 319 201 136 227 477 59 491 ...
     ##  $ City   : Factor w/ 384 levels "Abingdon","Abita Springs",..: 228 200 122 299 300 62 91 48 152 136 ...
     ##  $ State  : Factor w/ 51 levels " AK"," AL"," AR",..: 24 18 20 5 5 41 6 23 23 23 ...
 
+From running `load_and_explore_data.R` we verify `Beers Dataset` has
+2410 observations of 7 variables where as `Breweries Dateset` has 558
+observation of 4 variables. We notice`Name` is a common column name
+between the two datesets but means different things. In `Beers Dataset`,
+`Name` refers to the name of the beer whereas the `Name` in
+`Breweries dataset` refers to the name of the brewery. For our analysis,
+renamed `Name` in the `Beers Dataset` to `Beer_Name` and `Name` in the
+`Breweries dateset` to `Brewery_Name`. Since we plan to merge the two
+dataset using `Brewery_ID`, we renamed `Brew_ID` in the `Brewery datese`
+to `Brewery_ID`. This data cleaning is done `Clean_data.R` which is also
+in the analysis folder. We print the first 6 rows in each dataset to
+very the dataset columns have been renamed correctly. Below code block
+runs `Clean_data.R` Script.
+
+    #loading function to clean data
+    source(paste0(y,"/analysis/clean_data.R"))
+
+    ## [1] "Brewery Dataset, first 6 rows "
+    ##   Brewery_id              Brewery_Name          City State
+    ## 1          1        NorthGate Brewing    Minneapolis    MN
+    ## 2          2 Against the Grain Brewery    Louisville    KY
+    ## 3          3  Jack's Abby Craft Lagers    Framingham    MA
+    ## 4          4 Mike Hess Brewing Company     San Diego    CA
+    ## 5          5   Fort Point Beer Company San Francisco    CA
+    ## 6          6     COAST Brewing Company    Charleston    SC
+    ## [1] " "
+    ## [1] "Beers Dataset, first 6 rows "
+    ##             Beer_Name Beer_ID   ABV IBU Brewery_id
+    ## 1            Pub Beer    1436 0.050  NA        409
+    ## 2         Devil's Cup    2265 0.066  NA        178
+    ## 3 Rise of the Phoenix    2264 0.071  NA        178
+    ## 4            Sinister    2263 0.090  NA        178
+    ## 5       Sex and Candy    2262 0.075  NA        178
+    ## 6        Black Exodus    2261 0.077  NA        178
+    ##                            Style Ounces
+    ## 1            American Pale Lager     12
+    ## 2        American Pale Ale (APA)     12
+    ## 3                   American IPA     12
+    ## 4 American Double / Imperial IPA     12
+    ## 5                   American IPA     12
+    ## 6                  Oatmeal Stout     12
+
 ### Research Questions
+
+In this section, we address the research questions put together on this
+two dataset. The questions are numbered 1 to 7
 
 #### 1. How many breweries are present in each state?
 
     # I am using the count function to count the number of breweries grouped by "state"
-    names(breweries) #print the column names for breweries dataset
-
-    ## [1] "Brew_ID" "Name"    "City"    "State"
 
     count(breweries, "State")
 
@@ -127,26 +168,14 @@ running the codeblock below
     ## 50    WV    1
     ## 51    WY    4
 
-### 2. Merge beer data with breweries data by brewery id. Print ﬁrst 6 observations and the last six observations to check the merged ﬁle.
-
-    names(breweries) #Checking the  column names for breweries dataset
-
-    ## [1] "Brew_ID" "Name"    "City"    "State"
-
-    names(beers) #Checking column names for breweries dataset
-
-    ## [1] "Name"       "Beer_ID"    "ABV"        "IBU"        "Brewery_id"
-    ## [6] "Style"      "Ounces"
-
-    #renaming the breweries column name "Brew ID" to "Brewery_id" to match beers brewery_id
-    names(breweries)<-c("Brewery_id","Name","City", "State")
+#### 2. Merge beer data with breweries data by brewery id. Print ﬁrst 6 observations and the last six observations to check the merged ﬁle.
 
     # merge two data frames by ID
     Brewery_and_Beer <- merge(breweries,beers,by=c("Brewery_id"))
 
     head(Brewery_and_Beer) # printing the first 6 observations
 
-    ##   Brewery_id             Name.x        City State        Name.y Beer_ID
+    ##   Brewery_id       Brewery_Name        City State     Beer_Name Beer_ID
     ## 1          1 NorthGate Brewing  Minneapolis    MN       Pumpion    2689
     ## 2          1 NorthGate Brewing  Minneapolis    MN    Stronghold    2688
     ## 3          1 NorthGate Brewing  Minneapolis    MN   Parapet ESB    2687
@@ -163,14 +192,14 @@ running the codeblock below
 
     tail(Brewery_and_Beer) #printing the last 6 observations
 
-    ##      Brewery_id                        Name.x          City State
+    ##      Brewery_id                  Brewery_Name          City State
     ## 2405        556         Ukiah Brewing Company         Ukiah    CA
     ## 2406        557       Butternuts Beer and Ale Garrattsville    NY
     ## 2407        557       Butternuts Beer and Ale Garrattsville    NY
     ## 2408        557       Butternuts Beer and Ale Garrattsville    NY
     ## 2409        557       Butternuts Beer and Ale Garrattsville    NY
     ## 2410        558 Sleeping Lady Brewing Company     Anchorage    AK
-    ##                         Name.y Beer_ID   ABV IBU                   Style
+    ##                      Beer_Name Beer_ID   ABV IBU                   Style
     ## 2405             Pilsner Ukiah      98 0.055  NA         German Pilsener
     ## 2406         Porkslap Pale Ale      49 0.043  NA American Pale Ale (APA)
     ## 2407           Snapperhead IPA      51 0.068  NA            American IPA
@@ -185,7 +214,7 @@ running the codeblock below
     ## 2409     12
     ## 2410     12
 
-### 3. Report the number of NA’s in each column.
+#### 3. Report the number of NA’s in each column.
 
     # function to count the number of NAs per column
     NA_counter<-function(y){
@@ -196,19 +225,19 @@ running the codeblock below
     NA_count <- data.frame(NA_count)
     print(NA_count)
 
-    ##            NA_count
-    ## Brewery_id        0
-    ## Name.x            0
-    ## City              0
-    ## State             0
-    ## Name.y            0
-    ## Beer_ID           0
-    ## ABV              62
-    ## IBU            1005
-    ## Style             0
-    ## Ounces            0
+    ##              NA_count
+    ## Brewery_id          0
+    ## Brewery_Name        0
+    ## City                0
+    ## State               0
+    ## Beer_Name           0
+    ## Beer_ID             0
+    ## ABV                62
+    ## IBU              1005
+    ## Style               0
+    ## Ounces              0
 
-### 4. Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
+#### 4. Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
 
 This code block caclculate the median alcohol content(ABV) and
 International Bitterness (IBU) and plots a bar chart to compare them
@@ -340,16 +369,16 @@ International Bitterness (IBU) and plots a bar chart to compare them
     ggplot(IBU_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="Seagreen", fill="red",width=.7)+
     labs(title = "Bar Chart of Bitterness of Beer (IBU) by State")
 
-![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
     #this ggplot code block generates a bar of Alcohol Content (ABV) by state
 
     ggplot(ABV_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="red", fill="Seagreen",width=.7)+
     labs(title = "Bar Chart of Alcohol Content (ABV) by State") 
 
-![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-6-2.png)
+![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-7-2.png)
 
-### 5. Which state has the maximum alcoholic beer? Which state has the most bitter beer?
+#### 5. Which state has the maximum alcoholic beer? Which state has the most bitter beer?
 
     #maximum alcoholic beer
     #removing ABV NA's
@@ -374,7 +403,7 @@ International Bitterness (IBU) and plots a bar chart to compare them
 
     ## [1] "The state with Most bitter beer is -> OR"
 
-### 6. Summary statistics for ABV (Alcohol by volume) variable.
+#### 6. Summary statistics for ABV (Alcohol by volume) variable.
 
 I am using describeBy function from pysch package to generate
 descriptive statistics
@@ -403,7 +432,7 @@ descriptive statistics
     ## 6 0.043 0.065 0.022 1.16651660 -0.03764142 0.0027404752
     ## 7 0.048 0.092 0.044 0.06030106 -2.33333333 0.0127191894
 
-### 7. Is there a relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
+#### 7. Is there a relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
 
 There is a positive correlation between ABV and IBU as shown in the
 regression trend line in the scatter plot below. As IBU increase ABV.
@@ -413,10 +442,11 @@ regression trend line in the scatter plot below. As IBU increase ABV.
                     se=FALSE, na.rm=TRUE) +   # Don't add shaded confidence region
       labs(title = "Bitterness of Beer (IBU) vs Alcoholic Content (ABV)", x = "IBU", y ="ABV")
 
-![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
-session info
-============
+### Conclusion
+
+#### session info
 
     sessionInfo()
 
