@@ -24,10 +24,11 @@ document can be gerated by running either `batch.R` or
 ### Analysis
 
 We begin this analysis by loading R libraries that we will need. This is
-achived by running `load_libraries.R` which is in the analysis folder.
-`load_libraries.R` calls `p_load` from `pacman` library that checks if a
-library is installed or not, if not it installs it and loads the library
-for the R session
+achived by running
+`load_libraries.R`{<https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R>}
+which is in the analysis folder. `load_libraries.R` calls `p_load` from
+`pacman` library that checks if a library is installed or not, if not it
+installs it and loads the library for the R session
 
     #get Working Directory
     y<-getwd()
@@ -40,7 +41,7 @@ in the analysis folder is geared for this loading and exploratory
 analysis of this two dataset. We check for the number or rows and
 columns, column names and structure of each dataset using str() command
 which is available in base R.
-\[`load_and_explore_data.R`\]{<https://github.com/kevimwe/DoingDataScienceCaseStudy1/analysis/load_and_explore_data.R>}
+\[`load_and_explore_data.R`\]{<https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R>}
 is excecuted by running the codeblock below
 
     #load data to R
