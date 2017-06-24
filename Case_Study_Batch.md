@@ -1,29 +1,71 @@
+Beers and Breweries in the US
+=============================
+
 Author: Kevin Okiah
-===================
+-------------------
 
 Course: SMU MSDS6306
-====================
+--------------------
 
-Introduction
-============
+### Introduction
 
-This case study explores beers and breweries for the 51 states in the
-us.
+In this report, we explore beers and breweries data for the 51 states in
+the US. The steps and procedures taken in this analysis are stipulated
+below.We successfully merge two datasets `Beers dataset` which contains
+a list of 2410 US craft beers and `Breweries dataset` containing 558 US
+breweries.
+
+### Structure our repository and files in them
+
+### Running this reproducible research in R
+
+Begin by reading the README.md file in
+{<https://github.com/kevimwe/DoingDataScienceCaseStudy1>}. Clone or
+download this GitHub directory and its subdirectories. This markdown
+document can be gerated by running either `batch.R` or
+`Case_Study_Batch.Rmd`
+
+### Analysis
+
+We begin this analysis by loading R libraries that we will need. This is
+achived by running `load_libraries.R` which is in the analysis folder.
+`load_libraries.R` calls p\_load from `pacman` library that checks if a
+library is installed or not, if not it installs it and loads the library
+for the R session
 
     #get Working Directory
     y<-getwd()
-
     #load libraries required to run this project
     source(paste0(y,"/analysis/load_libraries.R"))
 
-    #load data to R
+Once we have loaded all the libraries that we need, we procede to to
+load `Beers` and `Breweries` datasets. `load_and_explore_data.R` found
+in the analysis folder is geared for this loading and exploratory
+analysis of this two dataset. We check for the number or rows and
+columns, column names and structure of each dataset using str() command
+which is available in base R. `load_and_explore_data.R` is excecuted by
+running the codeblock below
 
+    #load data to R
     source(paste0(y,"/analysis/load_and_explore_data.R"))
 
-Case Study Questions
---------------------
+    ## Beers dataset /n'data.frame':    2410 obs. of  7 variables:
+    ##  $ Name      : Factor w/ 2305 levels "#001 Golden Amber Lager",..: 1638 577 1705 1842 1819 268 1160 758 1093 486 ...
+    ##  $ Beer_ID   : int  1436 2265 2264 2263 2262 2261 2260 2259 2258 2131 ...
+    ##  $ ABV       : num  0.05 0.066 0.071 0.09 0.075 0.077 0.045 0.065 0.055 0.086 ...
+    ##  $ IBU       : int  NA NA NA NA NA NA NA NA NA NA ...
+    ##  $ Brewery_id: int  409 178 178 178 178 178 178 178 178 178 ...
+    ##  $ Style     : Factor w/ 100 levels "","Abbey Single Ale",..: 19 18 16 12 16 80 18 22 18 12 ...
+    ##  $ Ounces    : num  12 12 12 12 12 12 12 12 12 12 ...
+    ## Breweries dataset /n'data.frame':    558 obs. of  4 variables:
+    ##  $ Brew_ID: int  1 2 3 4 5 6 7 8 9 10 ...
+    ##  $ Name   : Factor w/ 551 levels "10 Barrel Brewing Company",..: 355 12 266 319 201 136 227 477 59 491 ...
+    ##  $ City   : Factor w/ 384 levels "Abingdon","Abita Springs",..: 228 200 122 299 300 62 91 48 152 136 ...
+    ##  $ State  : Factor w/ 51 levels " AK"," AL"," AR",..: 24 18 20 5 5 41 6 23 23 23 ...
 
-### 1. How many breweries are present in each state?
+### Research Questions
+
+#### 1. How many breweries are present in each state?
 
     # I am using the count function to count the number of breweries grouped by "state"
     names(breweries) #print the column names for breweries dataset
@@ -298,14 +340,14 @@ International Bitterness (IBU) and plots a bar chart to compare them
     ggplot(IBU_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="Seagreen", fill="red",width=.7)+
     labs(title = "Bar Chart of Bitterness of Beer (IBU) by State")
 
-![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-6-1.png)
 
     #this ggplot code block generates a bar of Alcohol Content (ABV) by state
 
     ggplot(ABV_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="red", fill="Seagreen",width=.7)+
     labs(title = "Bar Chart of Alcohol Content (ABV) by State") 
 
-![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-5-2.png)
+![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-6-2.png)
 
 ### 5. Which state has the maximum alcoholic beer? Which state has the most bitter beer?
 
@@ -371,7 +413,7 @@ regression trend line in the scatter plot below. As IBU increase ABV.
                     se=FALSE, na.rm=TRUE) +   # Don't add shaded confidence region
       labs(title = "Bitterness of Beer (IBU) vs Alcoholic Content (ABV)", x = "IBU", y ="ABV")
 
-![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
 session info
 ============

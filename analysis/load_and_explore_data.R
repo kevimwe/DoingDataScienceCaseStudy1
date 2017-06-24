@@ -2,10 +2,14 @@
 
 beers<-read.csv(paste0(y, "/data/beers.csv"))
 
-dim(beers) # number of rows and columns in the dataset
+cat('Beers dataset /n')
+
+str(beers)  # check th structure of beers dataset
 
 #load Breweries.csv data
 
+cat('Breweries dataset /n')
+
 breweries<-read.csv(paste0(y, "/data/breweries.csv"))
 
-dim(breweries) # number of rows and columns in the dataset
+str(breweries)  # check th structure of beers dataset
