@@ -242,17 +242,17 @@ highest number of NA's of all the available variables which is 1005.
 
     source(paste0(y,"/analysis/Number_of_NAs.R"))
 
-    ##              NA_count
-    ## Brewery_id          0
-    ## Brewery_Name        0
-    ## City                0
-    ## State               0
-    ## Beer_Name           0
-    ## Beer_ID             0
-    ## ABV                62
-    ## IBU              1005
-    ## Style               0
-    ## Ounces              0
+    ##              NAs_count
+    ## Brewery_id           0
+    ## Brewery_Name         0
+    ## City                 0
+    ## State                0
+    ## Beer_Name            0
+    ## Beer_ID              0
+    ## ABV                 62
+    ## IBU               1005
+    ## Style                0
+    ## Ounces               0
 
 #### 4. Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
 
@@ -264,8 +264,8 @@ code block then computes the median alcohol content(ABV) per state by
 calling `ABV_by_State.R` and stores the result in a dataframe
 `ABV_by_State`. It also computes median International Bitterness Units
 of the beer (IBU) per State by calling `IBU_by_State.R` and stores the
-result in `IBU_by_State`. `Bar_chart_Plotter.R`, plots a bar charts to
-comparing ABV and IBU in each State.
+result in `IBU_by_State`. `Bar_chart_Plotter.R`, plots a grid bar charts
+to comparing median ABV and median IBU in each of the 51 States.
 
     #Remove NA's
     Brewery_and_Beer_Clean<-na.omit(Brewery_and_Beer)
@@ -279,57 +279,57 @@ comparing ABV and IBU in each State.
 
     source(paste0(y,"/analysis/ABV_by_State.R"))
 
-    ##    State MeDian_ABV
-    ## 1     AK     0.0570
-    ## 2     AL     0.0600
-    ## 3     AR     0.0400
-    ## 4     AZ     0.0575
-    ## 5     CA     0.0580
-    ## 6     CO     0.0650
-    ## 7     CT     0.0610
-    ## 8     DC     0.0590
-    ## 9     DE     0.0550
-    ## 10    FL     0.0620
-    ## 11    GA     0.0620
-    ## 12    HI     0.0520
-    ## 13    IA     0.0560
-    ## 14    ID     0.0580
-    ## 15    IL     0.0570
-    ## 16    IN     0.0570
-    ## 17    KS     0.0500
-    ## 18    KY     0.0575
-    ## 19    LA     0.0510
-    ## 20    MA     0.0540
-    ## 21    MD     0.0565
-    ## 22    ME     0.0670
-    ## 23    MI     0.0560
-    ## 24    MN     0.0555
-    ## 25    MO     0.0500
-    ## 26    MS     0.0580
-    ## 27    MT     0.0570
-    ## 28    NC     0.0610
-    ## 29    ND     0.0500
-    ## 30    NE     0.0560
-    ## 31    NH     0.0465
-    ## 32    NJ     0.0460
-    ## 33    NM     0.0610
-    ## 34    NV     0.0550
-    ## 35    NY     0.0595
-    ## 36    OH     0.0575
-    ## 37    OK     0.0630
-    ## 38    OR     0.0560
-    ## 39    PA     0.0570
-    ## 40    RI     0.0525
-    ## 41    SC     0.0500
-    ## 43    TN     0.0550
-    ## 44    TX     0.0550
-    ## 45    UT     0.0400
-    ## 46    VA     0.0570
-    ## 47    VT     0.0550
-    ## 48    WA     0.0560
-    ## 49    WI     0.0510
-    ## 50    WV     0.0620
-    ## 51    WY     0.0510
+    ##    State    ABV
+    ## 1     AK 0.0570
+    ## 2     AL 0.0600
+    ## 3     AR 0.0400
+    ## 4     AZ 0.0575
+    ## 5     CA 0.0580
+    ## 6     CO 0.0650
+    ## 7     CT 0.0610
+    ## 8     DC 0.0590
+    ## 9     DE 0.0550
+    ## 10    FL 0.0620
+    ## 11    GA 0.0620
+    ## 12    HI 0.0520
+    ## 13    IA 0.0560
+    ## 14    ID 0.0580
+    ## 15    IL 0.0570
+    ## 16    IN 0.0570
+    ## 17    KS 0.0500
+    ## 18    KY 0.0575
+    ## 19    LA 0.0510
+    ## 20    MA 0.0540
+    ## 21    MD 0.0565
+    ## 22    ME 0.0670
+    ## 23    MI 0.0560
+    ## 24    MN 0.0555
+    ## 25    MO 0.0500
+    ## 26    MS 0.0580
+    ## 27    MT 0.0570
+    ## 28    NC 0.0610
+    ## 29    ND 0.0500
+    ## 30    NE 0.0560
+    ## 31    NH 0.0465
+    ## 32    NJ 0.0460
+    ## 33    NM 0.0610
+    ## 34    NV 0.0550
+    ## 35    NY 0.0595
+    ## 36    OH 0.0575
+    ## 37    OK 0.0630
+    ## 38    OR 0.0560
+    ## 39    PA 0.0570
+    ## 40    RI 0.0525
+    ## 41    SC 0.0500
+    ## 43    TN 0.0550
+    ## 44    TX 0.0550
+    ## 45    UT 0.0400
+    ## 46    VA 0.0570
+    ## 47    VT 0.0550
+    ## 48    WA 0.0560
+    ## 49    WI 0.0510
+    ## 50    WV 0.0620
+    ## 51    WY 0.0510
 
     print("Median IBU by State")
 
@@ -337,57 +337,57 @@ comparing ABV and IBU in each State.
 
     source(paste0(y,"/analysis/IBU_by_State.R"))
 
-    ##    State MeDian_IBU
-    ## 1     AK       46.0
-    ## 2     AL       43.0
-    ## 3     AR       39.0
-    ## 4     AZ       20.5
-    ## 5     CA       42.0
-    ## 6     CO       40.0
-    ## 7     CT       29.0
-    ## 8     DC       47.5
-    ## 9     DE       52.0
-    ## 10    FL       55.0
-    ## 11    GA       55.0
-    ## 12    HI       22.5
-    ## 13    IA       26.0
-    ## 14    ID       39.0
-    ## 15    IL       30.0
-    ## 16    IN       33.0
-    ## 17    KS       20.0
-    ## 18    KY       31.5
-    ## 19    LA       31.5
-    ## 20    MA       35.0
-    ## 21    MD       29.0
-    ## 22    ME       61.0
-    ## 23    MI       35.0
-    ## 24    MN       44.5
-    ## 25    MO       24.0
-    ## 26    MS       45.0
-    ## 27    MT       40.0
-    ## 28    NC       33.5
-    ## 29    ND       32.0
-    ## 30    NE       35.0
-    ## 31    NH       48.5
-    ## 32    NJ       34.5
-    ## 33    NM       51.0
-    ## 34    NV       41.0
-    ## 35    NY       47.0
-    ## 36    OH       40.0
-    ## 37    OK       35.0
-    ## 38    OR       40.0
-    ## 39    PA       30.0
-    ## 40    RI       24.0
-    ## 41    SC       30.0
-    ## 43    TN       37.0
-    ## 44    TX       33.0
-    ## 45    UT       34.0
-    ## 46    VA       42.0
-    ## 47    VT       30.0
-    ## 48    WA       38.0
-    ## 49    WI       19.0
-    ## 50    WV       57.5
-    ## 51    WY       21.0
+    ##    State  IBU
+    ## 1     AK 46.0
+    ## 2     AL 43.0
+    ## 3     AR 39.0
+    ## 4     AZ 20.5
+    ## 5     CA 42.0
+    ## 6     CO 40.0
+    ## 7     CT 29.0
+    ## 8     DC 47.5
+    ## 9     DE 52.0
+    ## 10    FL 55.0
+    ## 11    GA 55.0
+    ## 12    HI 22.5
+    ## 13    IA 26.0
+    ## 14    ID 39.0
+    ## 15    IL 30.0
+    ## 16    IN 33.0
+    ## 17    KS 20.0
+    ## 18    KY 31.5
+    ## 19    LA 31.5
+    ## 20    MA 35.0
+    ## 21    MD 29.0
+    ## 22    ME 61.0
+    ## 23    MI 35.0
+    ## 24    MN 44.5
+    ## 25    MO 24.0
+    ## 26    MS 45.0
+    ## 27    MT 40.0
+    ## 28    NC 33.5
+    ## 29    ND 32.0
+    ## 30    NE 35.0
+    ## 31    NH 48.5
+    ## 32    NJ 34.5
+    ## 33    NM 51.0
+    ## 34    NV 41.0
+    ## 35    NY 47.0
+    ## 36    OH 40.0
+    ## 37    OK 35.0
+    ## 38    OR 40.0
+    ## 39    PA 30.0
+    ## 40    RI 24.0
+    ## 41    SC 30.0
+    ## 43    TN 37.0
+    ## 44    TX 33.0
+    ## 45    UT 34.0
+    ## 46    VA 42.0
+    ## 47    VT 30.0
+    ## 48    WA 38.0
+    ## 49    WI 19.0
+    ## 50    WV 57.5
+    ## 51    WY 21.0
 
     Median_IBU_and_ABV<-merge(IBU_by_State,ABV_by_State, by = "State")
 
@@ -396,32 +396,26 @@ comparing ABV and IBU in each State.
 
     ## [1] "Plotting Bar Chart"
 
-    source(paste0(y,"/analysis/Bar_Chart_Plotter.R"))
-
-    ## Using State as id variables
+    suppressMessages(source(paste0(y,"/analysis/Bar_Chart_Plotter.R")))
 
 ![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 #### 5. Which state has the maximum alcoholic beer? Which state has the most bitter beer?
 
-    #maximum alcoholic beer
-    #removing ABV NA's
-    Brewery_and_Beer$missingABV <- (Brewery_and_Beer$ABV =="NA") #mark NAs
-    Brewery_and_Beer_ABV <- Brewery_and_Beer[which(Brewery_and_Beer$missingABV==FALSE),]# remove Nas
+In this code block, we identify `KY` as the State with the maximum
+alcoholic beer and `OR` as the state with the most bitter beer.
 
-    Max_ABV<-data.frame(Brewery_and_Beer_ABV[which(Brewery_and_Beer_ABV$ABV==max(Brewery_and_Beer_ABV$ABV)),]) # select the row with max ABV
+    #maximum alcoholic beer
+
+    # select the row with max ABV
+    Max_ABV<-data.frame(Brewery_and_Beer_Clean[which(Brewery_and_Beer_Clean$ABV==max(Brewery_and_Beer_Clean$ABV)),])
 
     print(paste0("The state with the beer with maximum alcohol is ->", Max_ABV$State)) # print the stae with Max alcoholic beer 
 
-    ## [1] "The state with the beer with maximum alcohol is -> CO"
+    ## [1] "The state with the beer with maximum alcohol is -> KY"
 
     #state with the most bitter beer
-
-    #removing ABV NA's
-    Brewery_and_Beer$missingIBU <- (Brewery_and_Beer$IBU =="NA") #mark NAs
-    Brewery_and_Beer_IBU <- Brewery_and_Beer[which(Brewery_and_Beer$missingIBU==FALSE),]# remove Nas
-
-    Max_IBU<-data.frame(Brewery_and_Beer_IBU[which(Brewery_and_Beer_IBU$IBU==max(Brewery_and_Beer_IBU$IBU)),]) # select the row with max IBU
+    Max_IBU<-data.frame(Brewery_and_Beer_Clean[which(Brewery_and_Beer_Clean$IBU==max(Brewery_and_Beer_Clean$IBU)),]) # select the row with max IBU
 
     print(paste0("The state with Most bitter beer is ->", Max_IBU$State)) # print the stae with Max alcoholic beer 
 
@@ -429,32 +423,34 @@ comparing ABV and IBU in each State.
 
 #### 6. Summary statistics for ABV (Alcohol by volume) variable.
 
-I am using describeBy function from pysch package to generate
-descriptive statistics
+To get the summary statistics of ABV by Volume variable, I am using
+describeBy function from pysch package to generate descriptive
+statistics shown below. To make the summary statistics more readable, I
+rename the variable column to Volume.
 
-    summary<-data.frame(describeBy(Brewery_and_Beer_ABV$ABV, Brewery_and_Beer_ABV$Ounces, mat=TRUE), row.names = NULL )# using describeBy function from pysch package for summary by
+    summary<-data.frame(describeBy(Brewery_and_Beer_Clean$ABV, Brewery_and_Beer_Clean$Ounces, mat=TRUE), row.names = NULL )# using describeBy function from pysch package for summary by
     #print(summary)
 
     #rename group name to volume
     names(summary)<- c("item","Volume","vars","n","mean","sd","median","trimmed","mad","min","max","range","skew","kurtosis","se") 
     print(summary)
 
-    ##   item Volume vars    n       mean         sd median    trimmed       mad
-    ## 1    1    8.4    1    1 0.09900000         NA  0.099 0.09900000 0.0000000
-    ## 2    2     12    1 1484 0.05793396 0.01230922  0.055 0.05657828 0.0103782
-    ## 3    3     16    1  821 0.06250305 0.01453764  0.060 0.06136073 0.0148260
-    ## 4    4   16.9    1    1 0.08500000         NA  0.085 0.08500000 0.0000000
-    ## 5    5   19.2    1   15 0.07920000 0.02086419  0.075 0.07753846 0.0148260
-    ## 6    6     24    1   22 0.06495455 0.01601927  0.065 0.06427778 0.0222390
-    ## 7    7     32    1    4 0.06450000 0.02042058  0.059 0.06450000 0.0148260
-    ##     min   max range      skew   kurtosis           se
-    ## 1 0.099 0.099 0.000        NA         NA           NA
-    ## 2 0.027 0.100 0.073 1.0652560  1.2412371 0.0003195314
-    ## 3 0.001 0.125 0.124 0.6598032  0.6630526 0.0005073671
-    ## 4 0.085 0.085 0.000        NA         NA           NA
-    ## 5 0.052 0.128 0.076 0.7194089 -0.3507762 0.0053871098
-    ## 6 0.043 0.099 0.056 0.2686468 -1.2203406 0.0034153190
-    ## 7 0.048 0.092 0.044 0.3904405 -2.0074282 0.0102102889
+    ##   item Volume vars   n       mean          sd median    trimmed       mad
+    ## 1    1    8.4    1   1 0.09900000          NA  0.099 0.09900000 0.0000000
+    ## 2    2     12    1 906 0.05865232 0.012696869  0.056 0.05726722 0.0103782
+    ## 3    3     16    1 479 0.06201253 0.014557772  0.059 0.06082078 0.0133434
+    ## 4    4   16.9    1   1 0.08500000          NA  0.085 0.08500000 0.0000000
+    ## 5    5   19.2    1   8 0.07450000 0.016440368  0.070 0.07450000 0.0074130
+    ## 6    6     24    1   7 0.04971429 0.007250616  0.049 0.04971429 0.0044478
+    ## 7    7     32    1   3 0.06933333 0.022030282  0.068 0.06933333 0.0296520
+    ##     min   max range       skew    kurtosis           se
+    ## 1 0.099 0.099 0.000         NA          NA           NA
+    ## 2 0.028 0.100 0.072 1.04358578  1.12295033 0.0004218252
+    ## 3 0.027 0.125 0.098 0.83423624  0.78285624 0.0006651616
+    ## 4 0.085 0.085 0.000         NA          NA           NA
+    ## 5 0.053 0.099 0.046 0.49140935 -1.37040971 0.0058125480
+    ## 6 0.043 0.065 0.022 1.16651660 -0.03764142 0.0027404752
+    ## 7 0.048 0.092 0.044 0.06030106 -2.33333333 0.0127191894
 
 #### 7. Is there a relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
 
@@ -464,11 +460,24 @@ regression trend line in the scatter plot below. As IBU increase ABV.
     p <- ggplot(Brewery_and_Beer, aes(Brewery_and_Beer$IBU, Brewery_and_Beer$ABV))
     p + geom_point(colour = "red", na.rm=TRUE)+    geom_smooth(method=lm,   # Add linear regression line
                     se=FALSE, na.rm=TRUE) +   # Don't add shaded confidence region
-      labs(title = "Bitterness of Beer (IBU) vs Alcoholic Content (ABV)", x = "IBU", y ="ABV")
+      labs(title = "Bitterness of Beer (IBU) vs Alcoholic Content (ABV)", x = "IBU", y ="ABV") +theme(plot.title = element_text(hjust = 0.5))
 
 ![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
 ### Conclusion
+
+In this report, we have explored Beers and Brewery data in the 51 US
+states. We broke our anlysis in 3 major chunks. 1. We began by loading
+the `Beers` and `Breweries` datasets. Using exploratory analysis, we
+examined the structure of our data,and renamed several columns. 2.
+Secondly we Merged our `cleaned` Beer and `Brewery` datasets, identified
+the number of missing variable and calculated the median `IBU` and `ABV`
+by State which we later plotted side by side bar charts for comparision.
+3. We finished by wrapping up our analysis by identifying the linear
+relationship between `ABV` and `IBU`. As `ABV` increases to does `IBU`
+increase. We can conclude that International Bitterness Units of
+beers`IBU` is positively correlated to Alcohol by Volume of the beer
+`ABV`.
 
 #### session info
 

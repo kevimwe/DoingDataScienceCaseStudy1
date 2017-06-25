@@ -3,6 +3,6 @@ NA_counter<-function(y){
   sum(length(which(is.na(y))))
 }
 # Using Sapply to call the NA_counter on Brewery_and_beer dataset
-NA_count <-sapply(Brewery_and_Beer, NA_counter)
-NA_count <- data.frame(NA_count)
-print(NA_count)
+NAs_count <-sapply(Brewery_and_Beer, NA_counter)
+NAs_count <- data.frame(NAs_count)
+print(NAs_count)
