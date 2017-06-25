@@ -14,22 +14,23 @@ In this report, we explore beers and breweries datasets for the 51 states in the
 
 ### Structure our repository and files in them
 
-This GitHub Website {https://github.com/kevimwe/DoingDataScienceCaseStudy1} is organised as follows. The root directory has  the follwoing improtant files and sub directories.
-  * [`README.md `](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/README.md) : This is the landing page of this GitHub analysis repository. It provides instructions on the organization of the repository and how to run this analysis.
-  * [`Case_Study_Batch.Rmd`]
-  * [`batch.R`]
-  * [`Case_Study_Batch.md`]  [`/Case_Study_Batch_files/figure-markdown_strict`]
-  * [`/data`]  
-      *
-      *
-      *
-  * [`/Analysis`]
-      *
-      *
-      *
-      *
-      *
-      *
+This GitHub Website {https://github.com/kevimwe/DoingDataScienceCaseStudy1} is organised as follows. The root directory has  the following important files and sub directories.
+  
+* [`README.md `](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/README.md) : This is the landing page of this GitHub analysis repository. It provides instructions on the organization of the repository and how to run this analysis.
+* [`Case_Study_Batch.Rmd`]
+* [`batch.R`]
+* [`Case_Study_Batch.md`]  [`/Case_Study_Batch_files/figure-markdown_strict`]
+* [`/data`]  
+    *[/data/Beers.csv](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv)
+    *[/data/Breweries.csv](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv)
+    *[/data/Brewery_and_Beer_Clean.csv](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv)
+* [`/Analysis`]
+    *[/analysis/load_libraries.R](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R)
+    *[/analysis/load_and_explore_data.R](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R)
+    *
+    *
+    *
+    *
 
 
 ### Running this reproducible research in R
