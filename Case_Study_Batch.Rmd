@@ -17,10 +17,9 @@ In this report, we explore beers and breweries datasets for the 51 states in the
 This GitHub Website {https://github.com/kevimwe/DoingDataScienceCaseStudy1} is organised as follows. The root directory has  the following important files and sub directories.
   
 * [`README.md `](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/README.md) : This is the landing page of this GitHub analysis repository. It provides instructions on the organization of the repository and how to run this analysis.
-* [`Case_Study_Batch.Rmd`]()
-* [`batch.R`]()
-* [`Case_Study_Batch.md`]()  
-    * [`/Case_Study_Batch_files/figure-markdown_strict`]
+* [`Case_Study_Batch.Rmd`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/Case_Study_Batch.Rmd) : This is the engine of this analysis. It knits together all the pieces for this analysis by calling R scripts in the analysis directory to perform different functions geared towards the generation a report of this analysis
+* [`batch.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/batch.R) is used to source `Case_Study_Batch.Rmd` if someone prefers to run this analysis in base R rather than as an rmarkdown script. 
+* [`Case_Study_Batch.md`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/Case_Study_Batch.md) This is the web readble report for this analysis. it contains both source code and outputs of the codes from running this analyis broken down in code blocks which are explained in details. The graphical images that are used in the `Case_Study_Batch.md`report are stored in [`/Case_Study_Batch_files/figure-markdown_strict`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/tree/master/Case_Study_Batch_files/figure-markdown_strict) subdirectory.
 * [`/data`]  
     * [`/data/Beers.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv)
     * [`/data/Breweries.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv)
