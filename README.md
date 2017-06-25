@@ -1,6 +1,7 @@
 ## Beers and Breweries in the us
 
 #### Author: Kevin Okiah                               
+#### 06/25/2017
 
 ### Introduction
 In this report, we explore beers and breweries datasets for the 51 states in the US. The steps and procedures taken in this analysis are stipulated below. We successfully merged the two datasets `Beers` dataset which contains a list of 2410 US craft beers and `Breweries` dataset containing 558 US breweries.
