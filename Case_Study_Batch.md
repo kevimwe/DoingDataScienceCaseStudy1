@@ -3,13 +3,15 @@ Beers and Breweries in the US
 
 #### Author: Kevin Okiah
 
+#### 06/25/2017
+
 ### Introduction
 
-In this report, we explore beers and breweries datasets for the 51
+In this report, we explore `beers` and `breweries` datasets for the 51
 states in the US. The steps and procedures taken in this analysis are
-stipulated below.We successfully merged the two datasets `Beers dataset`
-which contains a list of 2410 US craft beers and `Breweries dataset`
-containing 558 US breweries.
+stipulated below. We successfully merged the two datasets `Beers`
+dataset which contains a list of 2410 US craft beers to the `Breweries`
+dataset containing 558 US breweries.
 
 ### Structure our repository and files in them
 
@@ -20,20 +22,20 @@ directories.
 
 -   [`README.md`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/README.md)
     : This is the landing page of this GitHub analysis repository. It
-    provides instructions on the organization of the repository and how
-    to run this analysis.
+    provides insights on the organization of the repository and
+    instructions on how to run this analysis.
 -   [`Case_Study_Batch.Rmd`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/Case_Study_Batch.Rmd)
     : This is the engine of this analysis. It knits together all the
-    pieces for this analysis by calling R scripts in the analysis
+    pieces for this analysis by calling R scripts in the `/analysis`
     directory to perform different functions geared towards the
-    generation a report of this analysis
+    generation of a report for this analysis
 -   [`batch.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/batch.R):
     is used to source `Case_Study_Batch.Rmd` if someone prefers to run
-    this analysis in base R rather than an rmarkdown script.
+    this analysis in base R rather than as an rmarkdown script.
 -   [`Case_Study_Batch.md`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/Case_Study_Batch.md):
-    This is the web readble report for this analysis. it contains both
+    This is the web readable report for this analysis. It contains both
     source code and outputs of the codes from running this analyis
-    broken down in code blocks which are explained in details. The
+    broken down in code blocks which are explained in detail. The
     graphical images that are used in the `Case_Study_Batch.md`report
     are stored in
     [`/Case_Study_Batch_files/figure-markdown_strict`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/tree/master/Case_Study_Batch_files/figure-markdown_strict) subdirectory.
@@ -45,8 +47,7 @@ directories.
     -   [`/analysis/load_libraries.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R):
         loads the R libraries used in this analysis using `p_load()`
         function from
-        `[pacman`\](<https://cran.r-project.org/web/packages/pacman/vignettes/Introduction_to_pacman.html>)
-        library
+        `[pacman`\](<https://cran.r-project.org/web/packages/pacman/vignettes/Introduction_to_pacman.html>) library.
     -   [`/analysis/load_and_explore_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R):
         script loads `Beers` and `Breweries` dataset and performs some
         basic exploratory data analysis.
@@ -65,7 +66,7 @@ directories.
         of the beer (IBU) by States
     -   [`/analysis/Bar_Chart_Plotter.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Bar_Chart_Plotter.R):
         Uses ggplot2 R library to plot barchart to compare median ABV
-        and median IBU by State.
+        and median IBU by State
 -   [`/data`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data)
     directory holds the datasets that are used in this analysis. The
     datasets ased are listed below.
@@ -75,7 +76,7 @@ directories.
         this is the raw `Breweries` dataset
     -   [`/data/Brewery_and_Beer_Clean.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv):
         This is the `Beers` and `Breweries` datasets that have been
-        cleaned and merged are is ready for analysis
+        cleaned and merged ready for analysis
 
 ### Running this reproducible research in R
 
