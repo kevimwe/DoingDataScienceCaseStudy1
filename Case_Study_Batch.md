@@ -107,7 +107,7 @@ this two dataset. We check for the number or rows and columns, column
 names and structure of each dataset using str() command which is
 available in base R.
 [`load_and_explore_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R)
-is excecuted by running the codeblock below
+is excecuted by running the code block below
 
     #load data to R
     source(paste0(y,"/analysis/load_and_explore_data.R"))
@@ -180,8 +180,11 @@ two dataset. The questions are numbered 1 to 7
 
 We answer this question by using `count` function in base to count the
 number of breweries grouped by "state". This prints put a dataframe with
-two columns `state` which is the state name and `freq` which is the
-number of breweries in a given state. Each row represents one state.
+two columns `state` which is the State name and `freq` which is the
+number of breweries in a given state. Each row represents one State.
+Colorado has the highest number of breweries {47} where as Washington
+DC, South Dakota (SD), North Dakota (ND), and West Virginia (WV) tie for
+the least amount of breweries each with just 1.
 
     count(breweries, "State")
 
@@ -246,7 +249,7 @@ in
 we merge `Beers` and `Brewery` datasets by `Brewery_ID` using merge
 command for base R and assign the new dataset to `Brewery_and_Beer`. We
 use `head()` and `tail()` to print the first and last 6 rows of the
-newly created `Brewery_and_Beer` dataset respectively
+newly created `Brewery_and_Beer` dataset respectively.
 
     # merge two data frames by ID
     Brewery_and_Beer <- merge(breweries,beers,by=c("Brewery_id"))
@@ -467,24 +470,25 @@ to comparing median ABV and median IBU in each of the 51 States.
 
 #### 5. Which state has the maximum alcoholic beer? Which state has the most bitter beer?
 
-In this code block, we identify `KY` as the State with the maximum
-alcoholic beer and `OR` as the state with the most bitter beer.
+In this code block, we identify Kentucky(KY) as the State with the
+maximum alcoholic beer with an `ABV` of *0.125* and Oregon (OR) as the
+state with the most bitter beer with an `IBU` of *138*.
 
     #maximum alcoholic beer
 
     # select the row with max ABV
     Max_ABV<-data.frame(Brewery_and_Beer_Clean[which(Brewery_and_Beer_Clean$ABV==max(Brewery_and_Beer_Clean$ABV)),])
 
-    print(paste0("The state with the beer with maximum alcohol is ->", Max_ABV$State)) # print the stae with Max alcoholic beer 
+    print(paste0("The state with the beer with maximum alcohol is ->", Max_ABV$State, " with an ABV of ", Max_ABV$ABV)) # print the stae with Max alcoholic beer 
 
-    ## [1] "The state with the beer with maximum alcohol is -> KY"
+    ## [1] "The state with the beer with maximum alcohol is -> KY with an ABV of 0.125"
 
     #state with the most bitter beer
     Max_IBU<-data.frame(Brewery_and_Beer_Clean[which(Brewery_and_Beer_Clean$IBU==max(Brewery_and_Beer_Clean$IBU)),]) # select the row with max IBU
 
-    print(paste0("The state with Most bitter beer is ->", Max_IBU$State)) # print the stae with Max alcoholic beer 
+    print(paste0("The state with Most bitter beer is ->", Max_IBU$State, " with IBU of ", Max_IBU$IBU)) # print the stae with Max alcoholic beer 
 
-    ## [1] "The state with Most bitter beer is -> OR"
+    ## [1] "The state with Most bitter beer is -> OR with IBU of 138"
 
 #### 6. Summary statistics for ABV (Alcohol by volume) variable.
 
@@ -519,8 +523,9 @@ rename the variable column to Volume.
 
 #### 7. Is there a relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
 
-There is a positive correlation between ABV and IBU as shown in the
-regression trend line in the scatter plot below. As IBU increase ABV.
+There is a positive correlation between `ABV` and `IBU` as shown in the
+regression trend line in the scatter plot below. `IBU` increases with an
+increase in `ABV`.
 
     p <- ggplot(Brewery_and_Beer, aes(Brewery_and_Beer$IBU, Brewery_and_Beer$ABV))
     p + geom_point(colour = "red", na.rm=TRUE)+    geom_smooth(method=lm,   # Add linear regression line
@@ -532,19 +537,18 @@ regression trend line in the scatter plot below. As IBU increase ABV.
 ### Conclusion
 
 In this report, we have explored Beers and Brewery data in the 51 US
-states. We broke our anlysis in 3 major chunks. 1. We began by loading
-the `Beers` and `Breweries` datasets. Using exploratory analysis, we
-examined the structure of our data,and renamed several columns. 2.
-Secondly we Merged our `cleaned` Beer and `Brewery` datasets, identified
-the number of missing variable and calculated the median `IBU` and `ABV`
-by State which we later plotted side by side bar charts for comparision.
-3. We finished by wrapping up our analysis by identifying the linear
-relationship between `ABV` and `IBU`. As `ABV` increases to does `IBU`
-increase. We can conclude that International Bitterness Units of
-beers`IBU` is positively correlated to Alcohol by Volume of the beer
-`ABV`.
+states. We began by loading the `Beers` and `Breweries` datasets. Using
+exploratory analysis, we examined the structure of our data, and cleaned
+our individual datasets.We then proceeded to merge our cleaned `Beer`
+and `Brewery` datasets, identified the number of missing variable and
+calculated the median `IBU` and `ABV` by State which we later plotted
+side by side bar charts for comparision. We finished by wrapping up our
+analysis by looking at the the linear relationship between `ABV` and
+`IBU`. As `ABV` increases to does `IBU` increase. We can conclude that
+International Bitterness Units of beers`IBU` is positively correlated to
+Alcohol by Volume of the beer `ABV`.
 
-#### session info
+### Session info
 
     sessionInfo()
 
