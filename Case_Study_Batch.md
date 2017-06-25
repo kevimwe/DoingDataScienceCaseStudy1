@@ -22,18 +22,22 @@ directories.
     : This is the landing page of this GitHub analysis repository. It
     provides instructions on the organization of the repository and how
     to run this analysis.
--   \[`Case_Study_Batch.Rmd`\]
--   \[`batch.R`\]
--   \[`Case_Study_Batch.md`\]
-    \[`/Case_Study_Batch_files/figure-markdown_strict`\]
--   \[`/data`\]  
-    *[/data/Beers.csv](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv)
-    *[/data/Breweries.csv](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv)
-    \*[/data/Brewery\_and\_Beer\_Clean.csv](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv)
+-   [`Case_Study_Batch.Rmd`]()
+-   [`batch.R`]()
+-   [`Case_Study_Batch.md`]()
+    -   \[`/Case_Study_Batch_files/figure-markdown_strict`\]
+-   \[`/data`\]
+    -   [`/data/Beers.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv)
+    -   [`/data/Breweries.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv)
+    -   [`/data/Brewery_and_Beer_Clean.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv)
 -   \[`/Analysis`\]
-    *[/analysis/load\_libraries.R](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R)
-    *[/analysis/load\_and\_explore\_data.R](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R)
-    -   -   -   -   
+    -   [`/analysis/load_libraries.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R)
+    -   [`/analysis/load_and_explore_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R)
+    -   [`/analysis/Clean_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Clean_data.R)
+    -   [`/analysis/Number_of_NAs.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Number_of_NAs.R)
+    -   [`/analysis/ABV_by_State.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/ABV_by_State.R)
+    -   [`/analysis/IBU_by_State.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/IBU_by_State.R)
+    -   [`/analysis/Bar_Chart_Plotter.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Bar_Chart_Plotter.R)
 
 ### Running this reproducible research in R
 
