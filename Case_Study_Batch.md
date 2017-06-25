@@ -27,28 +27,53 @@ directories.
     pieces for this analysis by calling R scripts in the analysis
     directory to perform different functions geared towards the
     generation a report of this analysis
--   [`batch.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/batch.R)
+-   [`batch.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/batch.R):
     is used to source `Case_Study_Batch.Rmd` if someone prefers to run
-    this analysis in base R rather than as an rmarkdown script.
--   [`Case_Study_Batch.md`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/Case_Study_Batch.md)
+    this analysis in base R rather than an rmarkdown script.
+-   [`Case_Study_Batch.md`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/Case_Study_Batch.md):
     This is the web readble report for this analysis. it contains both
     source code and outputs of the codes from running this analyis
     broken down in code blocks which are explained in details. The
     graphical images that are used in the `Case_Study_Batch.md`report
     are stored in
     [`/Case_Study_Batch_files/figure-markdown_strict`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/tree/master/Case_Study_Batch_files/figure-markdown_strict) subdirectory.
+
+-   [`/Analysis`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis)
+    directory is the hub for the R scripts that are used in
+    this analysis. the different R scripts are listed below with
+    their functions.
+    -   [`/analysis/load_libraries.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R):
+        loads the R libraries used in this analysis using `p_load()`
+        function from
+        `[pacman`\](<https://cran.r-project.org/web/packages/pacman/vignettes/Introduction_to_pacman.html>)
+        library
+    -   [`/analysis/load_and_explore_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R):
+        script loads `Beers` and `Breweries` dataset and performs some
+        basic exploratory data analysis.
+    -   [`/analysis/Clean_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Clean_data.R):
+        script performs data cleaning operations on the `Beers` and
+        `Breweries` datasets. It renames several confusing columns in
+        both datasets.
+    -   [`/analysis/Number_of_NAs.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Number_of_NAs.R):
+        script counts and reports the number of NA's per columns in the
+        merged dataset of `Beers` and `Breweries`.
+    -   [`/analysis/ABV_by_State.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/ABV_by_State.R):
+        Computes and reports the median Alcohol by Volume of the
+        beer (ABV) by State.
+    -   [`/analysis/IBU_by_State.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/IBU_by_State.R):
+        Computes and reports the median International Bitterness Units
+        of the beer (IBU) by States
+    -   [`/analysis/Bar_Chart_Plotter.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Bar_Chart_Plotter.R):
+        Uses ggplot2 R library to plot barchart to compare median ABV
+        and median IBU by State
 -   \[`/data`\]
-    -   [`/data/Beers.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv)
-    -   [`/data/Breweries.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv)
-    -   [`/data/Brewery_and_Beer_Clean.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv)
--   \[`/Analysis`\]
-    -   [`/analysis/load_libraries.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R)
-    -   [`/analysis/load_and_explore_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R)
-    -   [`/analysis/Clean_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Clean_data.R)
-    -   [`/analysis/Number_of_NAs.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Number_of_NAs.R)
-    -   [`/analysis/ABV_by_State.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/ABV_by_State.R)
-    -   [`/analysis/IBU_by_State.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/IBU_by_State.R)
-    -   [`/analysis/Bar_Chart_Plotter.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Bar_Chart_Plotter.R)
+    -   [`/data/Beers.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv):
+        this is the raw `Beers` dataset
+    -   [`/data/Breweries.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv):
+        this is the raw `Breweries` dataset
+    -   [`/data/Brewery_and_Beer_Clean.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv):
+        This is the `Beers` and `Breweries` datasets that have been
+        cleaned and merged are is ready for analysis
 
 ### Running this reproducible research in R
 
