@@ -66,7 +66,8 @@ directories.
     -   [`/analysis/Bar_Chart_Plotter.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Bar_Chart_Plotter.R):
         Uses ggplot2 R library to plot barchart to compare median ABV
         and median IBU by State
--   \[`/data`\]
+-   [`/data`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data)
+    directory holds the datasets that are used in this analysis.
     -   [`/data/Beers.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv):
         this is the raw `Beers` dataset
     -   [`/data/Breweries.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv):

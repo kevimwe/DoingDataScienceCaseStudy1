@@ -1,5 +1,9 @@
 ## Beers and Breweries in the us
 
+#### Author: Kevin Okiah                               
+
+### Introduction
+In this report, we explore beers and breweries datasets for the 51 states in the US. The steps and procedures taken in this analysis are stipulated below. We successfully merged the two datasets `Beers` dataset which contains a list of 2410 US craft beers and `Breweries` dataset containing 558 US breweries.
 
 ### Structure our repository and files in them
 
@@ -19,7 +23,7 @@ This GitHub Website {https://github.com/kevimwe/DoingDataScienceCaseStudy1} is o
     * [`/analysis/IBU_by_State.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/IBU_by_State.R): Computes and reports the median International Bitterness Units of the beer (IBU) by States
     * [`/analysis/Bar_Chart_Plotter.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Bar_Chart_Plotter.R): Uses ggplot2 R library to plot barchart to compare median ABV and median IBU by State
 
-* [`/data`]  
+* [`/data`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data) directory holds the datasets that are used in this analysis.  
     * [`/data/Beers.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv): this is the raw `Beers` dataset
     * [`/data/Breweries.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv): this is the raw `Breweries` dataset
     * [`/data/Brewery_and_Beer_Clean.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv): This is the `Beers` and `Breweries` datasets that have been cleaned and merged are is ready for analysis
