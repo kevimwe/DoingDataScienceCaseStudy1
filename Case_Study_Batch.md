@@ -35,12 +35,12 @@ installs it and loads the library for the R session
     #load libraries required to run this project
     source(paste0(y,"/analysis/load_libraries.R"))
 
-Once we have loaded all the libraries that we need, we procede to to
-load `Beers` and `Breweries` datasets. `load_and_explore_data.R` found
-in the analysis folder is geared for this loading and exploratory
-analysis of this two dataset. We check for the number or rows and
-columns, column names and structure of each dataset using str() command
-which is available in base R.
+Once we have loaded all the libraries that we need, we proceed to load
+`Beers` and `Breweries` datasets. `load_and_explore_data.R` found in the
+analysis folder is geared for this loading and exploratory analysis of
+this two dataset. We check for the number or rows and columns, column
+names and structure of each dataset using str() command which is
+available in base R.
 [`load_and_explore_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R)
 is excecuted by running the codeblock below
 
@@ -72,10 +72,11 @@ between the two datesets but means different things. In `Beers Dataset`,
 renamed `Name` in the `Beers Dataset` to `Beer_Name` and `Name` in the
 `Breweries dateset` to `Brewery_Name`. Since we plan to merge the two
 dataset using `Brewery_ID`, we renamed `Brew_ID` in the `Brewery datese`
-to `Brewery_ID`. This data cleaning is done `Clean_data.R` which is also
-in the analysis folder. We print the first 6 rows in each dataset to
-very the dataset columns have been renamed correctly. Below code block
-runs `Clean_data.R` Script.
+to `Brewery_ID`. This data cleaning is done
+[`Clean_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Clean_data.R)
+which is also in the analysis folder. We print the first 6 rows in each
+dataset to very the dataset columns have been renamed correctly. Below
+code block runs `Clean_data.R` Script.
 
     #loading function to clean data
     source(paste0(y,"/analysis/clean_data.R"))
@@ -112,7 +113,10 @@ two dataset. The questions are numbered 1 to 7
 
 #### 1. How many breweries are present in each state?
 
-    # I am using the count function to count the number of breweries grouped by "state"
+We answer this question by using `count` function in base to count the
+number of breweries grouped by "state". This prints put a dataframe with
+two columns `state` which is the state name and `freq` which is the
+number of breweries in a given state. Each row represents one state.
 
     count(breweries, "State")
 
@@ -171,10 +175,18 @@ two dataset. The questions are numbered 1 to 7
 
 #### 2. Merge beer data with breweries data by brewery id. Print ﬁrst 6 observations and the last six observations to check the merged ﬁle.
 
+Since we have already cleaned our datasets by remaning the column names
+in
+[`Clean_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Clean_data.R),
+we merge `Beers` and `Brewery` datasets by `Brewery_ID` using merge
+command for base R and assign the new dataset to `Brewery_and_Beer`. We
+use `head()` and `tail()` to print the first and last 6 rows of the
+newly created `Brewery_and_Beer` dataset respectively
+
     # merge two data frames by ID
     Brewery_and_Beer <- merge(breweries,beers,by=c("Brewery_id"))
 
-    head(Brewery_and_Beer) # printing the first 6 observations
+    print(head(Brewery_and_Beer)) # printing the first 6 observations
 
     ##   Brewery_id       Brewery_Name        City State     Beer_Name Beer_ID
     ## 1          1 NorthGate Brewing  Minneapolis    MN       Pumpion    2689
@@ -191,7 +203,7 @@ two dataset. The questions are numbered 1 to 7
     ## 5 0.049  26                  Milk / Sweet Stout     16
     ## 6 0.048  19                   English Brown Ale     16
 
-    tail(Brewery_and_Beer) #printing the last 6 observations
+    print(tail(Brewery_and_Beer)) #printing the last 6 observations
 
     ##      Brewery_id                  Brewery_Name          City State
     ## 2405        556         Ukiah Brewing Company         Ukiah    CA
@@ -217,14 +229,18 @@ two dataset. The questions are numbered 1 to 7
 
 #### 3. Report the number of NA’s in each column.
 
-    # function to count the number of NAs per column
-    NA_counter<-function(y){
-      sum(length(which(is.na(y))))
-    }
-    # Using Sapply to call the NA_counter on Brewery_and_beer dataset
-    NA_count <-sapply(Brewery_and_Beer, NA_counter)
-    NA_count <- data.frame(NA_count)
-    print(NA_count)
+To count the number of NA's in each column of the merged dataset
+`Brewery_and_Beer`, we create `Number_of_NAs.R` which has a function
+called `NA_counter()`. `NA_Counter()` takes a column and and returns the
+number of NA's found in that column. Using Sapply we pass all the
+columns in `Brewery_and_Beer` to which returns the number of NA's as
+reported below. Calling
+[`Number_of_NAs.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Number_of_NAs.R)
+as shown in the code block below returns the summary of the number of
+NA's per column. International Bitterness Units of beer (IBU) has the
+highest number of NA's of all the available variables which is 1005.
+
+    source(paste0(y,"/analysis/Number_of_NAs.R"))
 
     ##              NA_count
     ## Brewery_id          0
@@ -240,144 +256,151 @@ two dataset. The questions are numbered 1 to 7
 
 #### 4. Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
 
-This code block caclculate the median alcohol content(ABV) and
-International Bitterness (IBU) and plots a bar chart to compare them
+We begin by removing NAs in the merged dataset `Brewery_and_Beer` by
+calling `na.omit()`. For reference by anyone running the same analyis,
+we save the cleaned dataset in
+[`/data/Brewery_and_Beer_Clean.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv).This
+code block then computes the median alcohol content(ABV) per state by
+calling `ABV_by_State.R` and stores the result in a dataframe
+`ABV_by_State`. It also computes median International Bitterness Units
+of the beer (IBU) per State by calling `IBU_by_State.R` and stores the
+result in `IBU_by_State`. `Bar_chart_Plotter.R`, plots a bar charts to
+comparing ABV and IBU in each State.
 
-    #clean data
-    Brewery_and_Beer<-na.omit(Brewery_and_Beer)
+    #Remove NA's
+    Brewery_and_Beer_Clean<-na.omit(Brewery_and_Beer)
+
+    # Save the NA free Brewery_and_Beer data in /data/Brewery_and_Beer_Clean.csv
+    write.csv(Brewery_and_Beer_Clean, file= paste0(y,"/data/Brewery_and_Beer_Clean.csv"))
+
+    print("Median ABV by State")
+
+    ## [1] "Median ABV by State"
+
+    source(paste0(y,"/analysis/ABV_by_State.R"))
+
+    ##    State MeDian_ABV
+    ## 1     AK     0.0570
+    ## 2     AL     0.0600
+    ## 3     AR     0.0400
+    ## 4     AZ     0.0575
+    ## 5     CA     0.0580
+    ## 6     CO     0.0650
+    ## 7     CT     0.0610
+    ## 8     DC     0.0590
+    ## 9     DE     0.0550
+    ## 10    FL     0.0620
+    ## 11    GA     0.0620
+    ## 12    HI     0.0520
+    ## 13    IA     0.0560
+    ## 14    ID     0.0580
+    ## 15    IL     0.0570
+    ## 16    IN     0.0570
+    ## 17    KS     0.0500
+    ## 18    KY     0.0575
+    ## 19    LA     0.0510
+    ## 20    MA     0.0540
+    ## 21    MD     0.0565
+    ## 22    ME     0.0670
+    ## 23    MI     0.0560
+    ## 24    MN     0.0555
+    ## 25    MO     0.0500
+    ## 26    MS     0.0580
+    ## 27    MT     0.0570
+    ## 28    NC     0.0610
+    ## 29    ND     0.0500
+    ## 30    NE     0.0560
+    ## 31    NH     0.0465
+    ## 32    NJ     0.0460
+    ## 33    NM     0.0610
+    ## 34    NV     0.0550
+    ## 35    NY     0.0595
+    ## 36    OH     0.0575
+    ## 37    OK     0.0630
+    ## 38    OR     0.0560
+    ## 39    PA     0.0570
+    ## 40    RI     0.0525
+    ## 41    SC     0.0500
+    ## 43    TN     0.0550
+    ## 44    TX     0.0550
+    ## 45    UT     0.0400
+    ## 46    VA     0.0570
+    ## 47    VT     0.0550
+    ## 48    WA     0.0560
+    ## 49    WI     0.0510
+    ## 50    WV     0.0620
+    ## 51    WY     0.0510
+
+    print("Median IBU by State")
+
+    ## [1] "Median IBU by State"
+
+    source(paste0(y,"/analysis/IBU_by_State.R"))
+
+    ##    State MeDian_IBU
+    ## 1     AK       46.0
+    ## 2     AL       43.0
+    ## 3     AR       39.0
+    ## 4     AZ       20.5
+    ## 5     CA       42.0
+    ## 6     CO       40.0
+    ## 7     CT       29.0
+    ## 8     DC       47.5
+    ## 9     DE       52.0
+    ## 10    FL       55.0
+    ## 11    GA       55.0
+    ## 12    HI       22.5
+    ## 13    IA       26.0
+    ## 14    ID       39.0
+    ## 15    IL       30.0
+    ## 16    IN       33.0
+    ## 17    KS       20.0
+    ## 18    KY       31.5
+    ## 19    LA       31.5
+    ## 20    MA       35.0
+    ## 21    MD       29.0
+    ## 22    ME       61.0
+    ## 23    MI       35.0
+    ## 24    MN       44.5
+    ## 25    MO       24.0
+    ## 26    MS       45.0
+    ## 27    MT       40.0
+    ## 28    NC       33.5
+    ## 29    ND       32.0
+    ## 30    NE       35.0
+    ## 31    NH       48.5
+    ## 32    NJ       34.5
+    ## 33    NM       51.0
+    ## 34    NV       41.0
+    ## 35    NY       47.0
+    ## 36    OH       40.0
+    ## 37    OK       35.0
+    ## 38    OR       40.0
+    ## 39    PA       30.0
+    ## 40    RI       24.0
+    ## 41    SC       30.0
+    ## 43    TN       37.0
+    ## 44    TX       33.0
+    ## 45    UT       34.0
+    ## 46    VA       42.0
+    ## 47    VT       30.0
+    ## 48    WA       38.0
+    ## 49    WI       19.0
+    ## 50    WV       57.5
+    ## 51    WY       21.0
+
+    Median_IBU_and_ABV<-merge(IBU_by_State,ABV_by_State, by = "State")
 
 
-    #Median IBU->international bitterness by state
-    IBU_by_State <- by( Brewery_and_Beer$IBU, Brewery_and_Beer$State, median)
-    IBU_by_State<-as.data.frame(IBU_by_State)
-    names(IBU_by_State) = c("State", "MeDian")
+    print("Plotting Bar Chart")
 
-    print(IBU_by_State)
+    ## [1] "Plotting Bar Chart"
 
-    ##    State MeDian
-    ## 1     AK   46.0
-    ## 2     AL   43.0
-    ## 3     AR   39.0
-    ## 4     AZ   20.5
-    ## 5     CA   42.0
-    ## 6     CO   40.0
-    ## 7     CT   29.0
-    ## 8     DC   47.5
-    ## 9     DE   52.0
-    ## 10    FL   55.0
-    ## 11    GA   55.0
-    ## 12    HI   22.5
-    ## 13    IA   26.0
-    ## 14    ID   39.0
-    ## 15    IL   30.0
-    ## 16    IN   33.0
-    ## 17    KS   20.0
-    ## 18    KY   31.5
-    ## 19    LA   31.5
-    ## 20    MA   35.0
-    ## 21    MD   29.0
-    ## 22    ME   61.0
-    ## 23    MI   35.0
-    ## 24    MN   44.5
-    ## 25    MO   24.0
-    ## 26    MS   45.0
-    ## 27    MT   40.0
-    ## 28    NC   33.5
-    ## 29    ND   32.0
-    ## 30    NE   35.0
-    ## 31    NH   48.5
-    ## 32    NJ   34.5
-    ## 33    NM   51.0
-    ## 34    NV   41.0
-    ## 35    NY   47.0
-    ## 36    OH   40.0
-    ## 37    OK   35.0
-    ## 38    OR   40.0
-    ## 39    PA   30.0
-    ## 40    RI   24.0
-    ## 41    SC   30.0
-    ## 43    TN   37.0
-    ## 44    TX   33.0
-    ## 45    UT   34.0
-    ## 46    VA   42.0
-    ## 47    VT   30.0
-    ## 48    WA   38.0
-    ## 49    WI   19.0
-    ## 50    WV   57.5
-    ## 51    WY   21.0
+    source(paste0(y,"/analysis/Bar_Chart_Plotter.R"))
 
-    #Median ABV -> Alcohol content by state
-    ABV_by_State <- by( Brewery_and_Beer$ABV, Brewery_and_Beer$State, median)
-    ABV_by_State <-as.data.frame(ABV_by_State)
-
-    names(ABV_by_State) = c("State", "MeDian")
-
-    print(ABV_by_State)
-
-    ##    State MeDian
-    ## 1     AK 0.0570
-    ## 2     AL 0.0600
-    ## 3     AR 0.0400
-    ## 4     AZ 0.0575
-    ## 5     CA 0.0580
-    ## 6     CO 0.0650
-    ## 7     CT 0.0610
-    ## 8     DC 0.0590
-    ## 9     DE 0.0550
-    ## 10    FL 0.0620
-    ## 11    GA 0.0620
-    ## 12    HI 0.0520
-    ## 13    IA 0.0560
-    ## 14    ID 0.0580
-    ## 15    IL 0.0570
-    ## 16    IN 0.0570
-    ## 17    KS 0.0500
-    ## 18    KY 0.0575
-    ## 19    LA 0.0510
-    ## 20    MA 0.0540
-    ## 21    MD 0.0565
-    ## 22    ME 0.0670
-    ## 23    MI 0.0560
-    ## 24    MN 0.0555
-    ## 25    MO 0.0500
-    ## 26    MS 0.0580
-    ## 27    MT 0.0570
-    ## 28    NC 0.0610
-    ## 29    ND 0.0500
-    ## 30    NE 0.0560
-    ## 31    NH 0.0465
-    ## 32    NJ 0.0460
-    ## 33    NM 0.0610
-    ## 34    NV 0.0550
-    ## 35    NY 0.0595
-    ## 36    OH 0.0575
-    ## 37    OK 0.0630
-    ## 38    OR 0.0560
-    ## 39    PA 0.0570
-    ## 40    RI 0.0525
-    ## 41    SC 0.0500
-    ## 43    TN 0.0550
-    ## 44    TX 0.0550
-    ## 45    UT 0.0400
-    ## 46    VA 0.0570
-    ## 47    VT 0.0550
-    ## 48    WA 0.0560
-    ## 49    WI 0.0510
-    ## 50    WV 0.0620
-    ## 51    WY 0.0510
-
-    # this ggplot code block generates a bar of international bitterness(IBU) by state
-    ggplot(IBU_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="Seagreen", fill="red",width=.7)+
-    labs(title = "Bar Chart of Bitterness of Beer (IBU) by State")
+    ## Using State as id variables
 
 ![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-7-1.png)
-
-    #this ggplot code block generates a bar of Alcohol Content (ABV) by state
-
-    ggplot(ABV_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="red", fill="Seagreen",width=.7)+
-    labs(title = "Bar Chart of Alcohol Content (ABV) by State") 
-
-![](Case_Study_Batch_files/figure-markdown_strict/unnamed-chunk-7-2.png)
 
 #### 5. Which state has the maximum alcoholic beer? Which state has the most bitter beer?
 
@@ -390,7 +413,7 @@ International Bitterness (IBU) and plots a bar chart to compare them
 
     print(paste0("The state with the beer with maximum alcohol is ->", Max_ABV$State)) # print the stae with Max alcoholic beer 
 
-    ## [1] "The state with the beer with maximum alcohol is -> KY"
+    ## [1] "The state with the beer with maximum alcohol is -> CO"
 
     #state with the most bitter beer
 
@@ -416,22 +439,22 @@ descriptive statistics
     names(summary)<- c("item","Volume","vars","n","mean","sd","median","trimmed","mad","min","max","range","skew","kurtosis","se") 
     print(summary)
 
-    ##   item Volume vars   n       mean          sd median    trimmed       mad
-    ## 1    1    8.4    1   1 0.09900000          NA  0.099 0.09900000 0.0000000
-    ## 2    2     12    1 906 0.05865232 0.012696869  0.056 0.05726722 0.0103782
-    ## 3    3     16    1 479 0.06201253 0.014557772  0.059 0.06082078 0.0133434
-    ## 4    4   16.9    1   1 0.08500000          NA  0.085 0.08500000 0.0000000
-    ## 5    5   19.2    1   8 0.07450000 0.016440368  0.070 0.07450000 0.0074130
-    ## 6    6     24    1   7 0.04971429 0.007250616  0.049 0.04971429 0.0044478
-    ## 7    7     32    1   3 0.06933333 0.022030282  0.068 0.06933333 0.0296520
-    ##     min   max range       skew    kurtosis           se
-    ## 1 0.099 0.099 0.000         NA          NA           NA
-    ## 2 0.028 0.100 0.072 1.04358578  1.12295033 0.0004218252
-    ## 3 0.027 0.125 0.098 0.83423624  0.78285624 0.0006651616
-    ## 4 0.085 0.085 0.000         NA          NA           NA
-    ## 5 0.053 0.099 0.046 0.49140935 -1.37040971 0.0058125480
-    ## 6 0.043 0.065 0.022 1.16651660 -0.03764142 0.0027404752
-    ## 7 0.048 0.092 0.044 0.06030106 -2.33333333 0.0127191894
+    ##   item Volume vars    n       mean         sd median    trimmed       mad
+    ## 1    1    8.4    1    1 0.09900000         NA  0.099 0.09900000 0.0000000
+    ## 2    2     12    1 1484 0.05793396 0.01230922  0.055 0.05657828 0.0103782
+    ## 3    3     16    1  821 0.06250305 0.01453764  0.060 0.06136073 0.0148260
+    ## 4    4   16.9    1    1 0.08500000         NA  0.085 0.08500000 0.0000000
+    ## 5    5   19.2    1   15 0.07920000 0.02086419  0.075 0.07753846 0.0148260
+    ## 6    6     24    1   22 0.06495455 0.01601927  0.065 0.06427778 0.0222390
+    ## 7    7     32    1    4 0.06450000 0.02042058  0.059 0.06450000 0.0148260
+    ##     min   max range      skew   kurtosis           se
+    ## 1 0.099 0.099 0.000        NA         NA           NA
+    ## 2 0.027 0.100 0.073 1.0652560  1.2412371 0.0003195314
+    ## 3 0.001 0.125 0.124 0.6598032  0.6630526 0.0005073671
+    ## 4 0.085 0.085 0.000        NA         NA           NA
+    ## 5 0.052 0.128 0.076 0.7194089 -0.3507762 0.0053871098
+    ## 6 0.043 0.099 0.056 0.2686468 -1.2203406 0.0034153190
+    ## 7 0.048 0.092 0.044 0.3904405 -2.0074282 0.0102102889
 
 #### 7. Is there a relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
 
@@ -466,14 +489,14 @@ regression trend line in the scatter plot below. As IBU increase ABV.
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] taRifx_1.0.6  psych_1.7.5   plyr_1.8.4    knitr_1.16    ggplot2_2.2.1
-    ## [6] pacman_0.4.6 
+    ## [1] reshape2_1.4.2 taRifx_1.0.6   psych_1.7.5    plyr_1.8.4    
+    ## [5] knitr_1.16     ggplot2_2.2.1  pacman_0.4.6  
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] Rcpp_0.12.8      magrittr_1.5     mnormt_1.5-5     munsell_0.4.3   
     ##  [5] colorspace_1.3-1 lattice_0.20-34  stringr_1.1.0    tools_3.3.2     
     ##  [9] parallel_3.3.2   grid_3.3.2       nlme_3.1-128     gtable_0.2.0    
     ## [13] htmltools_0.3.5  yaml_2.1.14      lazyeval_0.2.0   rprojroot_1.1   
-    ## [17] digest_0.6.10    assertthat_0.1   tibble_1.2       reshape2_1.4.2  
-    ## [21] evaluate_0.10    rmarkdown_1.5    labeling_0.3     stringi_1.1.2   
-    ## [25] scales_0.4.1     backports_1.0.4  foreign_0.8-67
+    ## [17] digest_0.6.10    assertthat_0.1   tibble_1.2       evaluate_0.10   
+    ## [21] rmarkdown_1.5    labeling_0.3     stringi_1.1.2    scales_0.4.1    
+    ## [25] backports_1.0.4  foreign_0.8-67

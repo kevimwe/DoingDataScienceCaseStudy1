@@ -18,7 +18,7 @@ In this report, we explore beers and breweries data for the 51 states in the US.
 Begin by reading the README.md file in {https://github.com/kevimwe/DoingDataScienceCaseStudy1}.  Clone or download this GitHub directory and its subdirectories. This markdown document can be gerated by running either `batch.R` or `Case_Study_Batch.Rmd`
 
 ### Analysis
-We begin this analysis by loading R libraries that we will need. This is achived by running `load_libraries.R`{https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R} which is in the analysis folder. `load_libraries.R` calls `p_load` from `pacman` library that checks if a library is installed or not, if not it installs it and loads the library for the R session
+We begin this analysis by loading R libraries that we will need. This is achived by running [`load_libraries.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R) which is in the analysis folder. `load_libraries.R` calls `p_load` from `pacman` library that checks if a library is installed or not, if not it installs it and loads the library for the R session
 
 ```{r}
 #get Working Directory
@@ -27,13 +27,13 @@ y<-getwd()
 source(paste0(y,"/analysis/load_libraries.R"))
 ```
 
-Once we have loaded all the libraries that we need, we procede to to load `Beers` and `Breweries` datasets. `load_and_explore_data.R` found in the analysis folder is geared for this loading and exploratory analysis of this two dataset.
-We check for the number or rows and columns, column names and structure of each dataset using str() command which is available in base R.  [`load_and_explore_data.R`]{https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R} is excecuted by running the codeblock below
+Once we have loaded all the libraries that we need, we proceed to load `Beers` and `Breweries` datasets. `load_and_explore_data.R` found in the analysis folder is geared for this loading and exploratory analysis of this two dataset.
+We check for the number or rows and columns, column names and structure of each dataset using str() command which is available in base R.  [`load_and_explore_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_and_explore_data.R) is excecuted by running the codeblock below
 ```{r}
 #load data to R
 source(paste0(y,"/analysis/load_and_explore_data.R"))
 ```
-From running `load_and_explore_data.R` we verify `Beers Dataset` has 2410 observations of  7 variables where as `Breweries Dateset` has 558 observation of  4 variables. We notice`Name` is a common column name between the two datesets but means different things. In `Beers Dataset`, `Name` refers to the name of the beer whereas the `Name` in `Breweries dataset` refers to the name of the brewery. For our analysis, renamed `Name` in the `Beers Dataset` to `Beer_Name` and `Name` in the `Breweries dateset` to `Brewery_Name`. Since we plan to merge the two dataset using `Brewery_ID`, we renamed `Brew_ID` in the `Brewery datese` to `Brewery_ID`. This data cleaning is done `Clean_data.R` which is also in the analysis folder. We print the first 6 rows in each dataset to very the dataset columns have been renamed correctly. Below code block runs `Clean_data.R` Script.
+From running `load_and_explore_data.R` we verify `Beers Dataset` has 2410 observations of  7 variables where as `Breweries Dateset` has 558 observation of  4 variables. We notice`Name` is a common column name between the two datesets but means different things. In `Beers Dataset`, `Name` refers to the name of the beer whereas the `Name` in `Breweries dataset` refers to the name of the brewery. For our analysis, renamed `Name` in the `Beers Dataset` to `Beer_Name` and `Name` in the `Breweries dateset` to `Brewery_Name`. Since we plan to merge the two dataset using `Brewery_ID`, we renamed `Brew_ID` in the `Brewery datese` to `Brewery_ID`. This data cleaning is done [`Clean_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Clean_data.R) which is also in the analysis folder. We print the first 6 rows in each dataset to very the dataset columns have been renamed correctly. Below code block runs `Clean_data.R` Script.
 
 ```{r}
 #loading function to clean data
@@ -47,66 +47,53 @@ source(paste0(y,"/analysis/clean_data.R"))
 In this section, we address the research questions put together on this two dataset. The questions are numbered 1 to 7
 
 #### 1. How many breweries are present in each state?
-```{r}
-# I am using the count function to count the number of breweries grouped by "state"
 
+We answer this question by using `count` function in base to count the number of breweries grouped by "state". This prints put a dataframe with two columns `state` which is the state name and `freq` which is the number of breweries in a given state. Each row represents one state. 
+```{r}
 count(breweries, "State")
 ```
 
 #### 2. Merge beer data with breweries data by brewery id. Print ﬁrst 6 observations and the last six observations to check the merged ﬁle.
+Since we have already cleaned our datasets by remaning the column names in [`Clean_data.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Clean_data.R), we merge `Beers` and `Brewery` datasets by `Brewery_ID` using merge command for base R and assign the new dataset to `Brewery_and_Beer`. We use `head()` and `tail()` to print the first and last 6 rows of the newly created `Brewery_and_Beer` dataset respectively
 ```{r}
 # merge two data frames by ID
 Brewery_and_Beer <- merge(breweries,beers,by=c("Brewery_id"))
 
-head(Brewery_and_Beer) # printing the first 6 observations
-tail(Brewery_and_Beer) #printing the last 6 observations
+print(head(Brewery_and_Beer)) # printing the first 6 observations
+
+print(tail(Brewery_and_Beer)) #printing the last 6 observations
 
 ```
 
 #### 3. Report the number of NA’s in each column.
+To count the number of NA's in each column of the merged dataset `Brewery_and_Beer`, we create `Number_of_NAs.R` which has a function  called `NA_counter()`. `NA_Counter()` takes a column and and returns the number of NA's found in that column. Using Sapply we pass all the columns in `Brewery_and_Beer` to which returns the number of NA's as reported below. Calling [`Number_of_NAs.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Number_of_NAs.R) as shown in the code block below returns the summary of the number of NA's per column. International Bitterness Units of beer (IBU) has the highest number of NA's  of all the available variables which is 1005.
 ```{r}
-# function to count the number of NAs per column
-NA_counter<-function(y){
-  sum(length(which(is.na(y))))
-}
-# Using Sapply to call the NA_counter on Brewery_and_beer dataset
-NA_count <-sapply(Brewery_and_Beer, NA_counter)
-NA_count <- data.frame(NA_count)
-print(NA_count)
+source(paste0(y,"/analysis/Number_of_NAs.R"))
 
 ```
 
 #### 4. Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
-This code block caclculate the median alcohol content(ABV) and International Bitterness (IBU) and plots a bar chart to compare them
+We begin by removing NAs in the merged dataset `Brewery_and_Beer` by calling `na.omit()`. For reference by anyone running the same analyis, we save the cleaned dataset in [`/data/Brewery_and_Beer_Clean.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Brewery_and_Beer_Clean.csv).This code block then computes the median alcohol content(ABV) per state by calling `ABV_by_State.R` and stores the result in a dataframe `ABV_by_State`. It also computes median International Bitterness Units of the beer (IBU) per State by calling  `IBU_by_State.R` and stores the result in `IBU_by_State`. `Bar_chart_Plotter.R`, plots a bar charts to comparing ABV and IBU in each State. 
 ```{r}
-#clean data
-Brewery_and_Beer<-na.omit(Brewery_and_Beer)
+#Remove NA's
+Brewery_and_Beer_Clean<-na.omit(Brewery_and_Beer)
+
+# Save the NA free Brewery_and_Beer data in /data/Brewery_and_Beer_Clean.csv
+write.csv(Brewery_and_Beer_Clean, file= paste0(y,"/data/Brewery_and_Beer_Clean.csv"))
+
+print("Median ABV by State")
+source(paste0(y,"/analysis/ABV_by_State.R"))
+
+print("Median IBU by State")
+source(paste0(y,"/analysis/IBU_by_State.R"))
 
 
-#Median IBU->international bitterness by state
-IBU_by_State <- by( Brewery_and_Beer$IBU, Brewery_and_Beer$State, median)
-IBU_by_State<-as.data.frame(IBU_by_State)
-names(IBU_by_State) = c("State", "MeDian")
-
-print(IBU_by_State)
-
-#Median ABV -> Alcohol content by state
-ABV_by_State <- by( Brewery_and_Beer$ABV, Brewery_and_Beer$State, median)
-ABV_by_State <-as.data.frame(ABV_by_State)
-
-names(ABV_by_State) = c("State", "MeDian")
-
-print(ABV_by_State)
+Median_IBU_and_ABV<-merge(IBU_by_State,ABV_by_State, by = "State")
 
 
-# this ggplot code block generates a bar of international bitterness(IBU) by state
-ggplot(IBU_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="Seagreen", fill="red",width=.7)+
-labs(title = "Bar Chart of Bitterness of Beer (IBU) by State")
+print("Plotting Bar Chart")
+source(paste0(y,"/analysis/Bar_Chart_Plotter.R"))
 
-#this ggplot code block generates a bar of Alcohol Content (ABV) by state
-
-ggplot(ABV_by_State, aes(State,MeDian))+geom_bar(stat = "identity", color="red", fill="Seagreen",width=.7)+
-labs(title = "Bar Chart of Alcohol Content (ABV) by State") 
 
 ```
 
