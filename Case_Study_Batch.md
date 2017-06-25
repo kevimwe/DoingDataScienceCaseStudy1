@@ -40,8 +40,8 @@ directories.
 
 -   [`/Analysis`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis)
     directory is the hub for the R scripts that are used in
-    this analysis. the different R scripts are listed below with
-    their functions.
+    this analysis. The different R scripts are listed below with a brief
+    description of their functions.
     -   [`/analysis/load_libraries.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/load_libraries.R):
         loads the R libraries used in this analysis using `p_load()`
         function from
@@ -65,9 +65,10 @@ directories.
         of the beer (IBU) by States
     -   [`/analysis/Bar_Chart_Plotter.R`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/analysis/Bar_Chart_Plotter.R):
         Uses ggplot2 R library to plot barchart to compare median ABV
-        and median IBU by State
+        and median IBU by State.
 -   [`/data`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data)
-    directory holds the datasets that are used in this analysis.
+    directory holds the datasets that are used in this analysis. The
+    datasets ased are listed below.
     -   [`/data/Beers.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Beers.csv):
         this is the raw `Beers` dataset
     -   [`/data/Breweries.csv`](https://github.com/kevimwe/DoingDataScienceCaseStudy1/blob/master/data/Breweries.csv):
@@ -561,8 +562,8 @@ beers`IBU` is positively correlated to Alcohol by Volume of the beer
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] reshape2_1.4.2 taRifx_1.0.6   psych_1.7.5    plyr_1.8.4    
-    ## [5] knitr_1.16     ggplot2_2.2.1  pacman_0.4.6  
+    ## [1] rmarkdown_1.5  reshape2_1.4.2 taRifx_1.0.6   psych_1.7.5   
+    ## [5] plyr_1.8.4     knitr_1.16     ggplot2_2.2.1  pacman_0.4.6  
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] Rcpp_0.12.8      magrittr_1.5     mnormt_1.5-5     munsell_0.4.3   
@@ -570,5 +571,5 @@ beers`IBU` is positively correlated to Alcohol by Volume of the beer
     ##  [9] parallel_3.3.2   grid_3.3.2       nlme_3.1-128     gtable_0.2.0    
     ## [13] htmltools_0.3.5  yaml_2.1.14      lazyeval_0.2.0   rprojroot_1.1   
     ## [17] digest_0.6.10    assertthat_0.1   tibble_1.2       evaluate_0.10   
-    ## [21] rmarkdown_1.5    labeling_0.3     stringi_1.1.2    scales_0.4.1    
-    ## [25] backports_1.0.4  foreign_0.8-67
+    ## [21] labeling_0.3     stringi_1.1.2    scales_0.4.1     backports_1.0.4 
+    ## [25] foreign_0.8-67
