@@ -8,7 +8,7 @@ In this report, we explore `beers` and `breweries` datasets for the 51 states in
 
 ### Structure our repository and files in them
 
-This GitHub Website {https://github.com/kevimwe/US-Breweries-Data-EDA/} is organised as follows. The root directory has  the following important files and sub directories.
+This GitHub Website {https://github.com/kevimwe/US-Breweries-Data-EDA/ } is organised as follows. The root directory has  the following important files and sub directories.
   
 * [`README.md `](https://github.com/kevimwe/US-Breweries-Data-EDA/blob/master/README.md) : This is the landing page of this GitHub analysis repository. It provides insights on the organization of the repository and instructions on how to run this analysis.
 * [`Case_Study_Batch.Rmd`](https://github.com/kevimwe/US-Breweries-Data-EDA/blob/master/Case_Study_Batch.Rmd) : This is the engine of this analysis. It knits together all the pieces for this analysis by calling R scripts in the `/analysis` directory to perform different functions geared towards the generation of a report for this analysis
